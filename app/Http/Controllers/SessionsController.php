@@ -33,4 +33,10 @@ class SessionsController extends Controller
             return redirect()->back()->exceptInput('password');
         }
     }
+    public function destroy()
+    {
+        Auth::logout();
+        session()->flash('success','欢迎下次再来');
+        return redirect('login');
+    }
 }
