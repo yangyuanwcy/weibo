@@ -8,6 +8,13 @@ use Hash;
 
 class SessionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest',[
+            'only'=>['create']
+        ]);
+    }
+
     //
     public function create()
     {
@@ -26,7 +33,10 @@ class SessionsController extends Controller
         return;*/
         if(Auth::attempt($credentials,$request->has('remember'))){
             session()->flash('success','欢迎回来！');
-            return redirect()->route('users.show',[Auth::user()]);
+            $fallback=route('users.show',Auth::user());
+            //重定向到之前访问到页面，附带一个默认地址，若历史访问链接为空，则跳转到默认页面$fallback
+            return redirect()->intended($fallback);
+            //return redirect()->route('users.show',[Auth::user()]);
         }else{
             session()->flash('danger','很抱歉，您的邮箱和密码不匹配');
             //return redirect()->back()->withInput();
