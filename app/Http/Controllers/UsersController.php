@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use phpDocumentor\Reflection\Types\Compound;
 
 class UsersController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth',[
-            'except'=>['show','create','store']
+            'except'=>['show','create','store','index']
         ]);
         $this->middleware('guest', [
                 'only'=>['create']
@@ -62,5 +63,10 @@ class UsersController extends Controller
         $user->update($data);
         session()->flash('success','更新成功！');
         return redirect()->route('users.show',$user->id);
+    }
+    public function index()
+    {
+        $users=User::paginate(10);
+        return view('users.index',compact('users'));
     }
 }
