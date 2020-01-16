@@ -10,16 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//主页，帮助页、关于页
 Route::get('/','StaticPagesController@home')->name('home');
 Route::get('help','StaticPagesController@help')->name('help');
 Route::get('about','StaticPagesController@about')->name('about');
-
+//用户注册
 Route::get('signup','UsersController@create')->name('signup');
 Route::resource('users','UsersController');
-
+//用户登录、登出
 Route::get('login','SessionsController@create')->name('login');
 Route::post('login','SessionsController@store')->name('login');
 Route::delete('logout','SessionsController@destroy')->name('logout');
-
+//用户激活
 Route::get('signup/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
