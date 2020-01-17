@@ -96,7 +96,7 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
+            'expire' => 60,//token有效期 60分钟
             'throttle' => 60,
         ],
     ],

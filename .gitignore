@@ -12,4 +12,6 @@ npm-debug.log
 yarn-error.log
 .idea/workspace.xml
 .idea/vcs.xml
+.idea/php.xml
+.idea/weibo.iml
 public/mix-manifest.json
