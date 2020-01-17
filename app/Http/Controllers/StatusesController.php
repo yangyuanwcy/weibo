@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use Auth;
 use HttpException;
 use Illuminate\Http\Request;
@@ -27,6 +28,13 @@ class StatusesController extends Controller
         }else{
             session()->flash('failed','噢，NO,您发布的状态迷路了！');
         }
+        return redirect()->back();
+    }
+    public function destroy(Status $status)
+    {
+        $this->authorize('destroy',$status);
+        $status->delete();
+        session()->flash('success','删除成功！');
         return redirect()->back();
     }
 }
