@@ -26,7 +26,8 @@ class SessionsController extends Controller
            'email'=>'required|email|max:255',
            'password'=>'required'
         ]);
-        /*if(Hash::check($request->password ,auth()->user($request->email)->getAuthPassword())){
+        /*var_dump(auth()->user());
+        if(Hash::check($request->password ,auth()->user($request->email)->getAuthPassword())){
         //if(password_verify($request->password,auth()->user($request->email)->getAuthPassword())){
             echo "yes";
         }
@@ -36,8 +37,8 @@ class SessionsController extends Controller
                 session()->flash('success','欢迎回来！');
                 $fallback=route('users.show',Auth::user());
                 //重定向到之前访问到页面，附带一个默认地址，若历史访问链接为空，则跳转到默认页面$fallback
-                return redirect()->intended($fallback);
-                //return redirect()->route('users.show',[Auth::user()]);
+                //return redirect()->intended($fallback);
+                return redirect()->route('users.show',[Auth::user()]);
             }else{
                 Auth::logout();
                 session()->flash('warning','你的账号未激活，请检查邮箱中的注册邮件进行激活。');
