@@ -115,6 +115,11 @@ class User extends Authenticatable
         if(!is_array($user_ids)){
             $user_ids=compact('user_ids');
         }
+        $key = array_search($this->id,$user_ids);
+        if(isset($key)){
+            unset($user_ids[$key]);
+            sort($user_ids);
+        }
         $this->followings()->sync($user_ids,false);
     }
     /*
