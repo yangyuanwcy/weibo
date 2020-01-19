@@ -115,11 +115,6 @@ class User extends Authenticatable
         if(!is_array($user_ids)){
             $user_ids=compact('user_ids');
         }
-        $key = array_search($this->id,$user_ids);
-        if(isset($key)){
-            unset($user_ids[$key]);
-            sort($user_ids);
-        }
         $this->followings()->sync($user_ids,false);
     }
     /*
@@ -135,7 +130,7 @@ class User extends Authenticatable
     /*
      * 判断是否为关注对象
      */
-    public function isfollowing($user_id)
+    public function isFollowing($user_id)
     {
         return $this->followings->contains($user_id);
     }
